@@ -10,7 +10,7 @@ Description: Functions to schedule the timing of GPS fix attempts on Lotek
     and basic interactive plots of tag locational data.
 License: CC0
 Depends:
-    R (>= 3.3.2),
+    R (>= 3.3),
 Imports:
     dplyr (>= 0.5.0),
     leaflet (>= 1.0.1),
