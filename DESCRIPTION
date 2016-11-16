@@ -1,0 +1,32 @@
+Package: pinpoint
+Type: Package
+Title: Scheduling fixes and reading and plotting data from Lotek PinPoint tags
+Version: 0.1.0
+Author: person("Adam", "Smith", email = "adam_d_smith@fws.gov", role = c("aut",
+    "cre"))
+Maintainer: Adam D. Smith <adam_d_smith@fws.gov>
+Description: Functions to schedule the timing of GPS fix attempts on Lotek
+    PinPoint tags as well as translate the output text file of processed Swift fixes
+    and basic interactive plots of tag locational data.
+License: CC0
+Depends:
+    R (>= 3.3.2),
+Imports:
+    dplyr (>= 0.5.0),
+    leaflet (>= 1.0.1),
+    lubridate (>= 1.6.0),
+    maptools (>= 0.8.40),
+    readr (>= 1.0.0),
+    tools (>= 3.3.2),
+    viridis (>= 0.3.4)
+Copyright: This software is in the public domain because it contains materials
+    that originally came from the United States Fish & Wildlife Service, an agency
+    of the United States Department of Interior. For more information, see the
+    official US DOI copyright policy at https://www.doi.gov/copyright. Note that
+    the use of the USFWS logo is restricted to official publications: https://
+    www.fws.gov/help/policies.html
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/adamdsmith/pinpoint
+BugReports: https://github.com/adamdsmith/pinpoint/issues
+RoxygenNote: 5.0.1
