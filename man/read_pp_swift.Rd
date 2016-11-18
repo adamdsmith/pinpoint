@@ -4,11 +4,13 @@
 \alias{read_pp_swift}
 \title{Read processed Swift fixes from PinPoint Host software output}
 \usage{
-read_pp_swift(swift_txt, out_tz = "America/New_York", valid_only = FALSE)
+read_pp_swift(swift_txt = NULL, out_tz = "America/New_York",
+  valid_only = FALSE)
 }
 \arguments{
-\item{swift_txt}{character path to the *.txt file created by the PinPoint Host
-software when processing Swift fixes}
+\item{swift_txt}{character scalar or vector containing path(s) to the *.txt file created
+by the PinPoint Host software when processing Swift fixes.  Default (`NULL`) prompts the
+user to select one or more files.}
 
 \item{out_tz}{character string indicating the desired output \code{\link[base]{timezone}}
 of the GPS fixes.  Datetimes will be converted from the standard GMT time zone of
