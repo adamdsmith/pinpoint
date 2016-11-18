@@ -8,9 +8,7 @@ plot_pp_swift(pp_swift, out_tz = "America/New_York", max_hdop = 4,
   min_sats = 4)
 }
 \arguments{
-\item{pp_swift}{either (1) a character path to the *.txt file created by the PinPoint
-Host software when processing Swift fixes or (2) a data frame created by
-\code{\link{read_pp_swift}}}
+\item{pp_swift}{a `data.frame` created by \code{\link{read_pp_swift}}}
 
 \item{out_tz}{character string indicating the desired output \code{\link[base]{timezone}}
 of the GPS fixes.  Datetimes will be converted from the standard GMT time zone of
