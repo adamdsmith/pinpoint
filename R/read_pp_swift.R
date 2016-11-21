@@ -30,5 +30,6 @@ read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_o
     out <- lapply(swift_txt, read_tidy_pp, out_tz = out_tz, valid_only = valid_only)
     out <- do.call("rbind", out)
   }
+  class(out) <- c("pp_df", "data.frame")
   out
 }

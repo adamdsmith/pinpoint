@@ -10,7 +10,7 @@
 #'  Limited experimentation finds fixes with HDOP <= 4 and at least 4 satellites to be of
 #'  adequate locational quality (usually within 20 m).  These are the defaults.
 #'
-#' @param pp_swift a `data.frame` created by \code{\link{read_pp_swift}}
+#' @param pp_df a `pp_df` object (i.e., a `data.frame` created by \code{\link{read_pp_swift}})
 #' @param out_tz character string indicating the desired output \code{\link[base]{timezone}}
 #'  of the GPS fixes.  Datetimes will be converted from the standard GMT time zone of
 #'  PinPoint fixes. Default is America/New_York.
@@ -21,26 +21,26 @@
 #' @import leaflet
 #' @export
 
-plot_pp_swift <- function(pp_swift, out_tz = "America/New_York",
+plot.pp_df <- function(pp_df, out_tz = "America/New_York",
                           max_hdop = 4, min_sats = 4)
 {
-  if (inherits(pp_swift, "data.frame")) {
-    if (!any(c("tag_id", "lat", "lon", "hdop", "n_sats") %in% names(pp_swift)))
+  if (inherits(pp_df, "data.frame")) {
+    if (!any(c("tag_id", "lat", "lon", "hdop", "n_sats") %in% names(pp_df)))
       stop("At least one required column is missing.\n",
            "Was the output created by the `read_pp_swift` function?")
   } else stop("Input is not a `data.frame`. Run `read_pp_swift` function to generate input.")
 
-  pp_swift <- pp_swift %>%
+  pp_df <- pp_df %>%
     dplyr::filter_(~status == "valid") %>%
     dplyr::filter_(~hdop <= max_hdop) %>%
     dplyr::filter_(~n_sats >= min_sats)
 
   # Set up separate overlays/colors by tag
-  tags <- unique(pp_swift$tag_id)
+  tags <- unique(pp_df$tag_id)
   colors = viridis::viridis(length(tags))
-  tag_colors = colorFactor(palette = colors, domain = pp_swift$tag_id)
+  tag_colors = colorFactor(palette = colors, domain = pp_df$tag_id)
 
-  p <- leaflet(pp_swift) %>%
+  p <- leaflet(pp_df) %>%
 
     # Base map group
     addProviderTiles("Esri.WorldImagery", group = "Aerial",
@@ -50,7 +50,7 @@ plot_pp_swift <- function(pp_swift, out_tz = "America/New_York",
                      options = tileOptions(minZoom=3))
 
     for (tag in tags) {
-    d <- pp_swift[pp_swift$tag_id == tag, ]
+    d <- pp_df[pp_df$tag_id == tag, ]
     p <- p %>% addCircleMarkers(data = d, lng = ~lon, lat = ~lat,
                                 fillColor = ~tag_colors(tag_id),
                                 fillOpacity = 1, radius = 5,
