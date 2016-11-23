@@ -3,6 +3,8 @@
 S3method(plot,pp_df)
 export(read_pp_swift)
 export(sched_pp_fixes)
+export(test_pp_swift)
+import(ggplot2)
 import(leaflet)
 importFrom(dplyr,"%>%")
 importFrom(lubridate,ymd_hm)
