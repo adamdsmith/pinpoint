@@ -26,4 +26,12 @@ This function uses \code{\link[leaflet]{leaflet}} to generate a basic interactiv
  \code{\link{test_pp_swift}} for more information).  These are the defaults.  For larger
  scale studies, fixes from 3 satellites may also be useful.
 }
+\examples{
+\dontrun{
+# Select apprpriate text files from file selection window that opens
+dat <- read_pp_swift() <- Sys.time()
+plot(dat)
+plot(dat, min_sats = 6)
+}
+}
 

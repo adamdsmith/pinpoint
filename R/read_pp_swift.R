@@ -15,6 +15,11 @@
 #'  that were unsuccessful.
 #' @importFrom lubridate ymd_hms ymd_hm
 #' @export
+#' @examples
+#' \dontrun{
+#' # Select apprpriate text files from file selection window that opens
+#' dat <- read_pp_swift()
+#' }
 
 read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_only = FALSE)
 {

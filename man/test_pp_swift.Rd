@@ -47,4 +47,12 @@ The reported 2-D RMS error assumes that errors in the north-south and east-west 
  63\% of positional locations on average; double it for the 95\% equivalent.  See Diggelen
  (2007) for more details: \url{http://gpsworld.com/gpsgnss-accuracy-lies-damn-lies-and-statistics-1134/})
 }
+\examples{
+\dontrun{
+# Select apprpriate text files from file selection window that opens
+dat <- read_pp_swift() <- Sys.time()
+dat <- test_pp_swift(dat, ref_coords = c(-83.360298, 33.895814))
+head(dat)
+}
+}
 

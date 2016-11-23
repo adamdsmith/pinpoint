@@ -33,6 +33,14 @@
 #' }
 #' @import ggplot2
 #' @export
+#' @examples
+#' \dontrun{
+#' # Select apprpriate text files from file selection window that opens
+#' dat <- read_pp_swift() <- Sys.time()
+#' dat <- test_pp_swift(dat, ref_coords = c(-83.360298, 33.895814))
+#' head(dat)
+#' }
+
 
 test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
                           min_sats = 4, max_hdop = 20)

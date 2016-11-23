@@ -17,6 +17,13 @@
 #'  <= 20) to accept a GPS fix as valid.
 #' @import leaflet
 #' @export
+#' @examples
+#' \dontrun{
+#' # Select apprpriate text files from file selection window that opens
+#' dat <- read_pp_swift() <- Sys.time()
+#' plot(dat)
+#' plot(dat, min_sats = 6)
+#' }
 
 plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
 {
