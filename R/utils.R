@@ -11,7 +11,7 @@ read_tidy_pp <- function(swift_txt, out_tz = "America/New_York", valid_only = FA
       sched_local = ~ymd_hm(paste(date, substr(rtc_time, 1, 5)), tz = "GMT"),
       fix_GMT = ~suppressWarnings(ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
       fix_local = ~suppressWarnings(ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
-      n_sats = ~sub("/.*", "", n_sats),
+      n_sats = ~as.integer(sub("/.*", "", n_sats)),
       status = ~ifelse(status == "Valid", "valid", "invalid")) %>%
     dplyr::select_(quote(tag_id), quote(status), quote(n_sats), quote(date),
                    quote(sched_local), quote(fix_local), quote(fix_GMT),
