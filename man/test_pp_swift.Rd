@@ -50,9 +50,10 @@ The reported 2-D RMS error assumes that errors in the north-south and east-west 
 \examples{
 \dontrun{
 # Select apprpriate text files from file selection window that opens
-dat <- read_pp_swift() <- Sys.time()
+pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
+dat <- read_pp_swift(pp_tests)
 dat <- test_pp_swift(dat, ref_coords = c(-83.360298, 33.895814))
-head(dat)
+dat <- test_pp_swift(dat, min_sats = 9, ref_coords = c(-83.360298, 33.895814))
 }
 }
 

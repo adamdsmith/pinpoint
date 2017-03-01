@@ -36,11 +36,11 @@
 #' @examples
 #' \dontrun{
 #' # Select apprpriate text files from file selection window that opens
-#' dat <- read_pp_swift() <- Sys.time()
+#' pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
+#' dat <- read_pp_swift(pp_tests)
 #' dat <- test_pp_swift(dat, ref_coords = c(-83.360298, 33.895814))
-#' head(dat)
+#' dat <- test_pp_swift(dat, min_sats = 9, ref_coords = c(-83.360298, 33.895814))
 #' }
-
 
 test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
                           min_sats = 4, max_hdop = 20)
@@ -70,7 +70,7 @@ test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
   out <- data.frame(out, error_l, error_b)
 
   rms <- out %>% dplyr::group_by_(~tag_id) %>%
-    summarise_(.dots = stats::setNames(
+    dplyr::summarise_(.dots = stats::setNames(
       list(~n(), ~sqrt(mean(error_l^2))),
       c("n_fixes", "RMS_m")))
 
