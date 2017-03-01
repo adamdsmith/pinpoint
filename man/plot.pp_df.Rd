@@ -28,10 +28,11 @@ This function uses \code{\link[leaflet]{leaflet}} to generate a basic interactiv
 }
 \examples{
 \dontrun{
-# Select apprpriate text files from file selection window that opens
-dat <- read_pp_swift() <- Sys.time()
+# Select appropriate text files from file selection window that opens
+pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
+dat <- read_pp_swift(pp_tests)
 plot(dat)
-plot(dat, min_sats = 6)
+plot(dat, min_sats = 8)
 }
 }
 

@@ -19,10 +19,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' # Select apprpriate text files from file selection window that opens
-#' dat <- read_pp_swift() <- Sys.time()
+#' # Select appropriate text files from file selection window that opens
+#' pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
+#' dat <- read_pp_swift(pp_tests)
 #' plot(dat)
-#' plot(dat, min_sats = 6)
+#' plot(dat, min_sats = 8)
 #' }
 
 plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
@@ -51,12 +52,10 @@ plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
     # Base map group
     addProviderTiles("Esri.WorldImagery", group = "Aerial",
                      options = tileOptions(minZoom=3, maxNativeZoom=19,
-                                                    maxZoom=22)) %>%
-    addProviderTiles("Stamen.Terrain", group = "Terrain",
-                     options = tileOptions(minZoom=3))
-
-
-
+                                           maxZoom=22)) %>%
+    addProviderTiles("OpenStreetMap.Mapnik", group = "Road",
+                     options = tileOptions(minZoom=3, maxNativeZoom=19,
+                                           maxZoom=22))
 
     for (tag in tags) {
     d <- pp_df[pp_df$tag_id == tag, ]
@@ -72,7 +71,7 @@ plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
                                 group = tag)
     }
 
-  p %>% addLayersControl(baseGroups = c("Aerial", "Terrain"),
+  p %>% addLayersControl(baseGroups = c("Aerial", "Road"),
                          overlayGroups = tags,
                          options = layersControlOptions(collapsed = FALSE)) %>%
     addScaleBar(position = "bottomright")
