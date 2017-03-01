@@ -18,7 +18,8 @@
 #' @examples
 #' \dontrun{
 #' # Select apprpriate text files from file selection window that opens
-#' dat <- read_pp_swift()
+#' pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
+#' dat <- read_pp_swift(pp_tests)
 #' }
 
 read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_only = FALSE)
