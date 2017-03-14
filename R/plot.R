@@ -44,7 +44,7 @@ plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
 
   # Set up separate overlays/colors by tag
   tags <- unique(pp_df$tag_id)
-  colors = viridis::viridis(length(tags))
+  colors = viridis::viridis(length(tags), option = "plasma")
   tag_colors = colorFactor(palette = colors, domain = pp_df$tag_id)
 
   p <- leaflet(pp_df) %>%
