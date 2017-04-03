@@ -17,8 +17,8 @@
 #'  information for PinPoint tags that will be used to filter tag data.  This object must
 #'  contain at least the following three variables: `tag_id` - integer or numeric PinPoint
 #'  tag identification number, `deploy_date` - `POSIXct` date of tag deployment, and
-#'  `recov_date` - `POSIXct` date of tag recovery.  Currently, data on the day of recovery
-#'  is ignored.
+#'  `recov_date` - `POSIXct` date of tag recovery.  Currently, data on the day of deployment
+#'  and recovery are is ignored.
 #' @importFrom lubridate ymd_hms ymd_hm
 #' @export
 #' @examples
@@ -52,7 +52,7 @@ read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_o
     out <- out %>%
       dplyr::left_join(deploy_df[c("tag_id", "deploy_date", "recov_date")], by = "tag_id") %>%
       dplyr::group_by(tag_id, deploy_date) %>%
-      dplyr::filter(date >= deploy_date, date < recov_date) %>% dplyr::ungroup() %>%
+      dplyr::filter(date > deploy_date, date < recov_date) %>% dplyr::ungroup() %>%
       dplyr::select(-deploy_date, -recov_date)
   }
   class(out) <- c("pp_df", "data.frame")
