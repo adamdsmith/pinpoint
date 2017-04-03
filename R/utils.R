@@ -7,10 +7,10 @@ read_tidy_pp <- function(swift_txt, out_tz = "America/New_York", valid_only = FA
                     col_types = "icccccc_ddddd", skip = 1)) %>%
     dplyr::mutate_(
       tag_id = ~as.integer(gsub("(^.*PinPoint )(\\d+)( .+$)", "\\2", swift_txt)),
-      date = ~as.Date(ymd_hms(paste(rtc_date, rtc_time), tz = "GMT"), tz = out_tz),
-      sched_local = ~ymd_hm(paste(date, substr(rtc_time, 1, 5)), tz = "GMT"),
-      fix_GMT = ~suppressWarnings(ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
-      fix_local = ~suppressWarnings(ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
+      date = ~as.Date(lubridate::ymd_hms(paste(rtc_date, rtc_time), tz = "GMT"), tz = out_tz),
+      sched_local = ~lubridate::ymd_hm(paste(date, substr(rtc_time, 1, 5)), tz = "GMT"),
+      fix_GMT = ~suppressWarnings(lubridate::ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
+      fix_local = ~suppressWarnings(lubridate::ymd_hms(paste(fix_date, fix_time), tz = "GMT")),
       n_sats = ~as.integer(sub("/.*", "", n_sats)),
       status = ~ifelse(status == "Valid", "valid", "invalid")) %>%
     dplyr::select_(quote(tag_id), quote(status), quote(n_sats), quote(date),
