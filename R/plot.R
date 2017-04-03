@@ -68,11 +68,11 @@ plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
                                                paste("HDOP:", hdop),
                                                paste(fix_local, tz),
                                                sep = "<br/>"),
-                                group = tag)
+                                group = as.character(tag))
     }
 
   p %>% addLayersControl(baseGroups = c("Aerial", "Road"),
-                         overlayGroups = tags,
+                         overlayGroups = as.character(tags),
                          options = layersControlOptions(collapsed = FALSE)) %>%
     addScaleBar(position = "bottomright")
 
