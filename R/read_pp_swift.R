@@ -13,6 +13,12 @@
 #' @param valid_only logical indicating whether unsuccessful GPS fix attempts should be
 #'  removed from the output data frame.  The default (FALSE) retains the scheduled fixes
 #'  that were unsuccessful.
+#' @param deploy_df `data.frame`, `tibble` or `tbl_df` containing deployment and recovery
+#'  information for PinPoint tags that will be used to filter tag data.  This object must
+#'  contain at least the following three variables: `tag_id` - integer or numeric PinPoint
+#'  tag identification number, `deploy_date` - `POSIXct` date of tag deployment, and
+#'  `recov_date` - `POSIXct` date of tag recovery.  Currently, data on the day of recovery
+#'  is ignored.
 #' @importFrom lubridate ymd_hms ymd_hm
 #' @export
 #' @examples
@@ -22,7 +28,8 @@
 #' dat <- read_pp_swift(pp_tests)
 #' }
 
-read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_only = FALSE)
+read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_only = FALSE,
+                          deploy_df = NULL)
 {
 
   if (is.null(swift_txt)) {
@@ -35,6 +42,18 @@ read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_o
   } else {
     out <- lapply(swift_txt, read_tidy_pp, out_tz = out_tz, valid_only = valid_only)
     out <- do.call("rbind", out)
+  }
+
+  if (!is.null(deploy_df)) {
+    stopifnot(all(c("tag_id", "deploy_date", "recov_date") %in% names(deploy_df)))
+    stopifnot(any(is.numeric(deploy_df$tag_id), is.integer(deploy_df$tag_id)))
+    stopifnot(all(inherits(deploy_df$deploy_date, "POSIXct"),
+                  inherits(deploy_df$recov_date, "POSIXct")))
+    out <- out %>%
+      dplyr::left_join(deploy_df[c("tag_id", "deploy_date", "recov_date")], by = "tag_id") %>%
+      dplyr::group_by(tag_id, deploy_date) %>%
+      dplyr::filter(date >= deploy_date, date < recov_date) %>% dplyr::ungroup() %>%
+      dplyr::select(-deploy_date, -recov_date)
   }
   class(out) <- c("pp_df", "data.frame")
   out
