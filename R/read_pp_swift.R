@@ -41,7 +41,7 @@ read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_o
     out <- read_tidy_pp(swift_txt, out_tz, valid_only)
   } else {
     out <- lapply(swift_txt, read_tidy_pp, out_tz = out_tz, valid_only = valid_only)
-    out <- do.call("rbind", out)
+    out <- bind_rows(out)
   }
 
   if (!is.null(deploy_df)) {
