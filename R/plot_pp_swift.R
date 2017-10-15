@@ -22,11 +22,11 @@
 #' # Select appropriate text files from file selection window that opens
 #' pp_tests <- list.files(path = system.file("extdata", package = "pinpoint"), full.names = TRUE)
 #' dat <- read_pp_swift(pp_tests)
-#' plot(dat)
-#' plot(dat, min_sats = 8)
+#' plot_pp_swift(dat)
+#' plot_pp_swift(dat, min_sats = 8)
 #' }
 
-plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
+plot_pp_swift <- function(pp_df, min_sats = 4, max_hdop = 20)
 {
   if (inherits(pp_df, "data.frame")) {
     if (!any(c("tag_id", "lat", "lon", "hdop", "n_sats") %in% names(pp_df)))
