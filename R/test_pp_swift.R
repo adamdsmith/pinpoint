@@ -60,10 +60,8 @@ test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
            .data$n_sats >= min_sats)
 
   # Find distance and bearing between fixes and reference coordinates
-  fix_sp <- sp::SpatialPoints(out[, c("lon", "lat")],
-                          proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
-  ref_sp <- sp::SpatialPoints(cbind(ref_coords[1], ref_coords[2]),
-                          proj4string = sp::CRS("+proj=longlat +datum=WGS84"))
+  fix_sp <- cbind(out$lon, out$lat)
+  ref_sp <- cbind(ref_coords[1], ref_coords[2])
   error_l <- geosphere::distVincentyEllipsoid(ref_sp, fix_sp) %>% round(1)
   error_b <- geosphere::bearing(ref_sp, fix_sp) %>% round(1)
 
