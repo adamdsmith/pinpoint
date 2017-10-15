@@ -33,7 +33,8 @@ read_pp_swift <- function(swift_txt = NULL, out_tz = "America/New_York", valid_o
 {
 
   if (is.null(swift_txt)) {
-    swift_txt <- utils::choose.files(default = "PinPoint", filters = Filters["txt",],
+    txt_filt <- matrix(c("Text files (*.txt)", "*.txt"), nrow = 1)
+    swift_txt <- utils::choose.files(default = "PinPoint", filters = txt_filt,
                            caption = "Select .txt files containing processed PinPoint Swift fixes.")
     if (length(swift_txt) == 0) stop("Function cancelled.  No PinPoint output files selected.")
   }
