@@ -74,12 +74,12 @@ test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
   # Plot it
   p <- ggplot(out, aes(x = error_l)) +
     geom_histogram(binwidth = 3, colour="black", fill="white") +
-    geom_vline(aes(xintercept = median(error_l)), color = "red", linetype = "dashed", size = 1) +
+    geom_vline(aes(xintercept = stats::median(error_l)), color = "red", linetype = "dashed", size = 1) +
     facet_wrap(~tag_id, ncol = 3, scales = "free") + xlab("Absolute error (m)") +
     ylab("# fixes") + theme_bw()
   print(p)
 
-  View(rms)
+  utils::View(rms)
 
   class(out) <- c("pp_df", "data.frame")
   out
