@@ -35,4 +35,3 @@ plot(dat)
 plot(dat, min_sats = 8)
 }
 }
-

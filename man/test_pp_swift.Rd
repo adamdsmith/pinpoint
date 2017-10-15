@@ -11,7 +11,7 @@ test_pp_swift(pp_df, ref_coords = c(-83.36, 33.95), min_sats = 4,
 \item{pp_df}{a `pp_df` object (i.e., a `data.frame` created by \code{\link{read_pp_swift}})}
 
 \item{ref_coords}{a vector of coordinates (decimal degrees, WGS84 datum) of the reference location
-in the form (longitude, latitude).}
+in the form \code{c(longitude, latitude)}.}
 
 \item{min_sats}{numeric/integer scalar indicating the minimum number of satellites
 required (default is 4) to accept a GPS fix as valid.}
@@ -56,4 +56,3 @@ dat <- test_pp_swift(dat, ref_coords = c(-83.360298, 33.895814))
 dat <- test_pp_swift(dat, min_sats = 9, ref_coords = c(-83.360298, 33.895814))
 }
 }
-

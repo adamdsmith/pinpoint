@@ -33,4 +33,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/adamdsmith/pinpoint
 BugReports: https://github.com/adamdsmith/pinpoint/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

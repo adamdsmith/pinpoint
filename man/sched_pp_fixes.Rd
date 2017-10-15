@@ -33,4 +33,3 @@ dt_seq <- seq(from = now, length.out = 5, by = "6 hours")
 # Generate schedule 'test.ASF' in current directory
 sched_pp_fixes(dt_seq, tz = "America/New_York", out_file = "./test")
 }
-
