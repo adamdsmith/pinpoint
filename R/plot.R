@@ -35,9 +35,9 @@ plot.pp_df <- function(pp_df, min_sats = 4, max_hdop = 20)
   } else stop("Input is not a `data.frame`. Run `read_pp_swift` function to generate input.")
 
   pp_df <- pp_df %>%
-    dplyr::filter_(~status == "valid") %>%
-    dplyr::filter_(~hdop <= max_hdop) %>%
-    dplyr::filter_(~n_sats >= min_sats)
+    filter(.data$status == "valid",
+           .data$hdop <= max_hdop,
+           .data$n_sats >= min_sats)
 
   # Get timezone of fixes
   tz <- attributes(pp_df[["fix_local"]])$tzone

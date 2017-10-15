@@ -4,5 +4,6 @@
 #'
 #' @docType package
 #' @name pinpoint
-#' @importFrom dplyr "%>%"
+#' @import dplyr
+#' @importFrom rlang .data
 NULL

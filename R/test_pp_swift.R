@@ -55,9 +55,9 @@ test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
     stop("Check your specification of the input reference coordinates `ref_coords`.")
 
   out <- pp_df %>%
-    dplyr::filter_(~status == "valid") %>%
-    dplyr::filter_(~hdop <= max_hdop) %>%
-    dplyr::filter_(~n_sats >= min_sats)
+    filter(.data$status == "valid",
+           .data$hdop <= max_hdop,
+           .data$n_sats >= min_sats)
 
   # Find distance and bearing between fixes and reference coordinates
   fix_sp <- sp::SpatialPoints(out[, c("lon", "lat")],
@@ -69,10 +69,9 @@ test_pp_swift <- function(pp_df, ref_coords = c(-83.36, 33.95),
 
   out <- data.frame(out, error_l, error_b)
 
-  rms <- out %>% dplyr::group_by_(~tag_id) %>%
-    dplyr::summarise_(.dots = stats::setNames(
-      list(~n(), ~sqrt(mean(error_l^2))),
-      c("n_fixes", "RMS_m")))
+  rms <- out %>% group_by(.data$tag_id) %>%
+    summarize(n_fixes = n(),
+              RMS_m = sqrt(mean(.data$error_l^2)))
 
   # Plot it
   p <- ggplot(out, aes(x = error_l)) +
