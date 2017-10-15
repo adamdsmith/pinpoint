@@ -63,6 +63,6 @@ sched_pp_fixes <- function(date_times, tz = "GMT",
   message("PinPoint GPS logger schedule written to:\n",
           normalizePath(out_file, "/"))
 
-  invisible(NULL)
+  invisible()
 
 }

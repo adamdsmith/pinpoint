@@ -20,7 +20,7 @@
 #'
 #' @param pp_df a `pp_df` object (i.e., a `data.frame` created by \code{\link{read_pp_swift}})
 #' @param ref_coords a vector of coordinates (decimal degrees, WGS84 datum) of the reference location
-#'  in the form (longitude, latitude).
+#'  in the form \code{c(longitude, latitude)}.
 #' @param min_sats numeric/integer scalar indicating the minimum number of satellites
 #'  required (default is 4) to accept a GPS fix as valid.
 #' @param max_hdop numeric scalar indicating the maximum dilution of precision (default is
