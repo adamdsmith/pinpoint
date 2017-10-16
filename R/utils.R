@@ -21,6 +21,6 @@ read_tidy_pp <- function(swift_txt, out_tz = "America/New_York", valid_only = FA
             .data$hdop, .data$eres)
   )
   attr(out$sched_local, "tzone") <- attr(out$fix_local, "tzone") <- out_tz
-  if (valid_only) out <- filter_(out, .data$status == "valid")
+  if (valid_only) out <- filter(out, .data$status == "valid")
   as.data.frame(out)
 }
