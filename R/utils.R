@@ -2,11 +2,11 @@ read_tidy_pp <- function(swift_txt, out_tz = "America/New_York", valid_only = FA
   suppressWarnings(
     out <- readr::read_fwf(
       swift_txt,
-      readr::fwf_empty(swift_txt, skip = 1,
+      readr::fwf_empty(swift_txt, skip = 1, n = 100000,
                        col_names = c("index", "status", "n_sats", "rtc_date",
                                      "rtc_time", "fix_date", "fix_time", "delta_s",
-                                     "lat", "lon", "alt", "hdop", "eres")),
-      col_types = "icccccc_ddddd", skip = 1) %>%
+                                     "lat", "lon", "alt", "hdop", "eres", "temp_c", "voltage")),
+      col_types = "icccccc_ddddddd", skip = 1) %>%
     mutate(
       tag_id = as.integer(gsub("(^.*PinPoint )(\\d+)( .+$)", "\\2", swift_txt)),
       date = as.Date(ymd_hms(paste(.data$rtc_date, .data$rtc_time), tz = "GMT"),
