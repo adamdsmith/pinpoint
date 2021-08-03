@@ -13,18 +13,11 @@ The `pinpoint` package requires you to have [R](https://www.r-project.org/) (&gt
 
 With R and Rtools installed, it's simple to install and load the `pinpoint` package to access its functionality. If you receive an SSL or CA Certificate error, you may need to take the extra step documented below.
 
-    # If devtools package is not installed
-    install.packages("devtools", dependencies = TRUE)
+    # If remotes package is not installed
+    install.packages("remotes", dependencies = TRUE)
 
-    # Now install and load r4streams
-    devtools::install_github("adamdsmith/pinpoint")
-    library("pinpoint")
-
-    # If you receive a SSL or CA Certificate error
-    install.packages("httr")
-    library("httr")
-    set_config(config(ssl_verifypeer = 0L))
-    devtools::install_github("adamdsmith/pinpoint")
+    # Now install and load pinpoint
+    remotes::install_github("adamdsmith/pinpoint")
     library("pinpoint")
 
 **Demonstration coming soon**
